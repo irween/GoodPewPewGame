@@ -9,6 +9,7 @@ public class MouseTurning : MonoBehaviour
     {
         
     }
+
     public bool piercing = false;
     public float timeToFireInterval = 1.0f;
     private float timeToFire;
@@ -44,6 +45,13 @@ public class MouseTurning : MonoBehaviour
         {
             piercing = true;
             Destroy(other.gameObject);
+            StartCoroutine(PowerupCountdownRoutine());
         }
+    }
+
+    IEnumerator PowerupCountdownRoutine()
+    {
+        yield return new WaitForSeconds(7);
+        piercing = false;
     }
 }

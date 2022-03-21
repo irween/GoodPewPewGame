@@ -28,9 +28,5 @@ public class NormalProjectile : MonoBehaviour
             explosionParticle.Play();
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.CompareTag("Spawner"))
-        {
-            explosionParticle.Play();
-        }
     }
 }

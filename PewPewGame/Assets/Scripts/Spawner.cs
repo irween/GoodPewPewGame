@@ -5,51 +5,59 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     public GameObject[] Enemies;
-    public float spawnRangeX = 35;
-    public float spawnRangeY = 35;
+    public GameObject[] Powerups;
+    public float spawnRangeX = 30;
+    public float spawnRangeZ = 30;
     public float startDelay = 2;
     public float spawnInterval = 5f;
+    public int waveNumber = 1;
+    public int enemyIndex;
+    public int powerupIndex;
+    public int enemyCount;
+    public int powerupCount;
+    private List<powerupList> ["Piercing"]
 
     // Start is called before the first frame update
     void Start()
     {
-        // InvokeRepeating("SpawnRandomEnemy", startDelay, spawnInterval);
-        SpawnRandomEnemy();
+        SpawnRandomEnemyWave(1);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        enemyCount = FindObjectsOfType<Enemy>().Length;
+
+        powerupCount = FindObjectsOfType<powerupList[0]>().Length;
+
+        if (enemyCount == 0)
+        {
+            waveNumber++;
+            SpawnRandomEnemyWave(waveNumber);
+        }
     }
-    public int enemyIndex;
+
+    void SpawnRandomEnemyWave(int waves)
+    {
+        for (int i = 0; i < waves; i++)
+        {
+            SpawnRandomEnemy();
+        }
+    }
 
     void SpawnRandomEnemy()
     {
         int enemyIndex = Random.Range(0, Enemies.Length);
-        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
-            1, Random.Range(-spawnRangeY, spawnRangeY));
-        Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
-    }
 
-    public float lives = 5;
-    private float livesCount = 1;
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Projectile"))
-        {
-            if (livesCount == lives)
-            {
-                Destroy(gameObject);
-            }
-            else if (other.gameObject.CompareTag("Projectile"))
-            {
-                Destroy(other.gameObject);
-            }
-            else
-            {
-                livesCount = livesCount + 1;
-            }
-        }
+        int powerupIndex = Random.Range(0, Powerups.Length);
+
+        Vector3 spawnposPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+            1, Random.Range(-spawnRangeZ, spawnRangeZ));
+
+        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+            1, Random.Range(-spawnRangeZ, spawnRangeZ));
+
+        Instantiate(Powerups[powerupIndex], spawnposPowerup, Powerups[powerupIndex].transform.rotation);
+        Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
     }
 }
