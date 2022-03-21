@@ -6,29 +6,28 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] Enemies;
     public GameObject[] Powerups;
+
     public float spawnRangeX = 30;
     public float spawnRangeZ = 30;
     public float startDelay = 2;
     public float spawnInterval = 5f;
     public int waveNumber = 1;
+
     public int enemyIndex;
     public int powerupIndex;
     public int enemyCount;
     public int powerupCount;
-    private List<powerupList> ["Piercing"]
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnRandomEnemyWave(1);
     }
-
+    
     // Update is called once per frame
     void Update()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
-
-        powerupCount = FindObjectsOfType<powerupList[0]>().Length;
 
         if (enemyCount == 0)
         {
