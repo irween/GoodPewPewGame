@@ -27,6 +27,7 @@ public class NormalProjectile : MonoBehaviour
         {
             explosionParticle.Play();
             Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
