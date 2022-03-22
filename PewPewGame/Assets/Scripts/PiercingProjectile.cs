@@ -7,10 +7,11 @@ public class PiercingProjectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     public ParticleSystem explosionParticle;
-
+    public int pointValue = 50;
+    private GameManager gameManager;
     // Update is called once per frame
     void Update()
     {

@@ -33,7 +33,6 @@ public class Enemy : MonoBehaviour
         {
             Destroy(other.gameObject);
             gameManager.UpdateScore(pointValue);
-
         }
         if (other.gameObject.CompareTag("PiercingProjectile"))
         {
