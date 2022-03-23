@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionParticle: {fileID: 8842485686795437823}
-  piercing: 0
+  pointValue: 50
 --- !u!54 &-8430238861392051816
 Rigidbody:
   m_ObjectHideFlags: 0

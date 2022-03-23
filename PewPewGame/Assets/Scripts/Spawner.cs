@@ -28,6 +28,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         enemyCount = FindObjectsOfType<Enemy>().Length;
+        powerupCount = FindObjectsOfType<Powerups>().Length;
 
         if (enemyCount == 0)
         {
@@ -41,6 +42,10 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < waves; i++)
         {
             SpawnRandomEnemy();
+            if (powerupCount == 0)
+            {
+                SpawnRandomPowerup();
+            }
         }
     }
 
@@ -48,15 +53,22 @@ public class Spawner : MonoBehaviour
     {
         int enemyIndex = Random.Range(0, Enemies.Length);
 
+        
+
+        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+            1, Random.Range(-spawnRangeZ, spawnRangeZ));
+
+        Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
+    }
+    void SpawnRandomPowerup()
+    {
         int powerupIndex = Random.Range(0, Powerups.Length);
 
         Vector3 spawnposPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
             1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
-            1, Random.Range(-spawnRangeZ, spawnRangeZ));
-
         Instantiate(Powerups[powerupIndex], spawnposPowerup, Powerups[powerupIndex].transform.rotation);
-        Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
+
+        
     }
 }

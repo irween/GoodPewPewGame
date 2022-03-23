@@ -30,6 +30,7 @@ public class NormalProjectile : MonoBehaviour
             explosionParticle.Play();
             Destroy(gameObject);
             Destroy(other.gameObject);
+            gameManager.UpdateScore(pointValue);
         }
     }
 }

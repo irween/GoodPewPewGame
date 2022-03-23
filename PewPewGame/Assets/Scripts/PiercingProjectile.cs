@@ -28,6 +28,7 @@ public class PiercingProjectile : MonoBehaviour
         {
             explosionParticle.Play();
             Destroy(other.gameObject);
+            gameManager.UpdateScore(pointValue);
         }
     }
 }

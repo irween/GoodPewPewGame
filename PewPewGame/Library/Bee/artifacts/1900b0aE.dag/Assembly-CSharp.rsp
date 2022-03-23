@@ -355,6 +355,7 @@
 "Assets/Scripts/OutOfBounds.cs"
 "Assets/Scripts/PiercingProjectile.cs"
 "Assets/Scripts/PlayerController.cs"
+"Assets/Scripts/Powerups.cs"
 "Assets/Scripts/Shooting.cs"
 "Assets/Scripts/Spawner.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public int score;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI powerupIndicator;
+    public string powerup;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,11 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = "Score: " + score;
+        scoreText.text = "Score : " + score;
+    }
+
+    public void UpdatePowerup(string powerup)
+    {
+        powerupIndicator.text = "Powerup : " + powerup; 
     }
 }

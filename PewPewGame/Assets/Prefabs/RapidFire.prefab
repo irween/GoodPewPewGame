@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d173db8399078ca47b1288ef4d1fb0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 8842485686795437823}
   pointValue: 50
 --- !u!54 &-8430238861392051816
 Rigidbody:
@@ -276,5 +276,10 @@ PrefabInstance:
 --- !u!4 &3009208618485683954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3303195482613169217, guid: cb7cd9b0c56a24d49a40784bd3203ae6, type: 3}
+  m_PrefabInstance: {fileID: 294305735489563315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8842485686795437823 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9125212449759046732, guid: cb7cd9b0c56a24d49a40784bd3203ae6, type: 3}
   m_PrefabInstance: {fileID: 294305735489563315}
   m_PrefabAsset: {fileID: 0}

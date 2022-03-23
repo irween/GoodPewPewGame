@@ -7,9 +7,12 @@ public class Shooting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
-    public float timeToFireInterval = 1.0f;
+
+    private GameManager gameManager;
+    public float timeToFireInterval = 0.5f;
     private float timeToFire;
     public GameObject[] projectilePrefab;
     public int projectileIndex;
@@ -24,6 +27,7 @@ public class Shooting : MonoBehaviour
             if (piercing)
             {
                 Instantiate(projectilePrefab[1], transform.position + offset, transform.rotation);
+                timeToFireInterval = 1;
                 timeToFire = timeToFireInterval;
             }
             if (rapidFire)
@@ -34,6 +38,7 @@ public class Shooting : MonoBehaviour
             else
             {
                 Instantiate(projectilePrefab[0], transform.position + offset, transform.rotation);
+                timeToFireInterval = 0.5f;
                 timeToFire = timeToFireInterval;
             }
 
@@ -44,14 +49,19 @@ public class Shooting : MonoBehaviour
         if (other.gameObject.CompareTag("Piercing"))
         {
             piercing = true;
+            rapidFire = false;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
+            gameManager.UpdatePowerup("Piercing");
         }
         else if (other.gameObject.CompareTag("RapidFire"))
         {
             rapidFire = true;
             Destroy(other.gameObject);
+            piercing = false;
             StartCoroutine(PowerupCountdownRoutine());
+            gameManager.UpdatePowerup("RapidFire");
+
         }
     }
     public bool piercing = false;
@@ -61,5 +71,7 @@ public class Shooting : MonoBehaviour
         yield return new WaitForSeconds(7);
         piercing = false;
         rapidFire = false;
+        gameManager.UpdatePowerup("None");
+
     }
 }
