@@ -10,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
         
     }
 
-    private Vector3 offset = new Vector3(0, 15, -3);
+    private Vector3 offset = new Vector3(0, 15, 0);
     public GameObject player;
     // Update is called once per frame
     void Update()
