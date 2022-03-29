@@ -20,15 +20,16 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // taking a number away from time to fire every frame
         timeToFire -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && timeToFire <= 0)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && timeToFire <= 0) // when the left mouse button
         {
-            if (piercing)
+            if (piercing) // if the player has the piercing powerup
             {
-                Instantiate(projectilePrefab[1], transform.position + offset, transform.rotation);
-                timeToFireInterval = 1;
-                timeToFire = timeToFireInterval;
+                Instantiate(projectilePrefab[1], transform.position + offset, transform.rotation); // this spawns the piercing projectile which shoots
+                timeToFireInterval = 0.5; // this sets the interval between shooting to 
+                timeToFire = timeToFireInterval;  // 
             }
             if (rapidFire)
             {
