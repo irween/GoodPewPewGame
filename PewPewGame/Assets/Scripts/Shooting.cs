@@ -28,7 +28,7 @@ public class Shooting : MonoBehaviour
             if (piercing) // if the player has the piercing powerup
             {
                 Instantiate(projectilePrefab[1], transform.position + offset, transform.rotation); // this spawns the piercing projectile which shoots
-                timeToFireInterval = 0.5; // this sets the interval between shooting to 
+                timeToFireInterval = 0.5f; // this sets the interval between shooting to 
                 timeToFire = timeToFireInterval;  // 
             }
             if (rapidFire)
