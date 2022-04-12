@@ -11,19 +11,24 @@ public class Shooting : MonoBehaviour
 
     }
 
+    private float timeToFire;
     private GameManager gameManager;
     public float timeToFireInterval = 0.5f;
-    private float timeToFire;
     public GameObject[] projectilePrefab;
     public int projectileIndex;
     public Vector3 offset = new Vector3(0, 0, 0);
+    public int powerupTime;
+    public Material RapidFire;
+    public Material Piercing;
+    public Material Gun;
+
     // Update is called once per frame
     void Update()
     {
         // taking a number away from time to fire every frame
         timeToFire -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && timeToFire <= 0) // when the left mouse button
+        if (Input.GetMouseButton(0) && timeToFire <= 0) // when the left mouse button
         {
             if (piercing) // if the player has the piercing powerup
             {
@@ -31,7 +36,7 @@ public class Shooting : MonoBehaviour
                 timeToFireInterval = 0.5f; // this sets the interval between shooting to 
                 timeToFire = timeToFireInterval;  // 
             }
-            if (rapidFire)
+            else if (rapidFire)
             {
                 Instantiate(projectilePrefab[2], transform.position + offset, transform.rotation);
                 timeToFireInterval = 0.1f;
@@ -42,7 +47,6 @@ public class Shooting : MonoBehaviour
                 timeToFireInterval = 0.5f;
                 timeToFire = timeToFireInterval;
             }
-
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -50,17 +54,21 @@ public class Shooting : MonoBehaviour
         if (other.gameObject.CompareTag("Piercing"))
         {
             piercing = true;
+            powerupTime = 7;
             rapidFire = false;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
+            GetComponent<Renderer>().material = Piercing;
             gameManager.UpdatePowerup("Piercing");
         }
         else if (other.gameObject.CompareTag("RapidFire"))
         {
             rapidFire = true;
+            powerupTime = 1;
             Destroy(other.gameObject);
-            piercing = false;
             StartCoroutine(PowerupCountdownRoutine());
+            GetComponent<Renderer>().material = RapidFire;
+            piercing = false;
             gameManager.UpdatePowerup("RapidFire");
 
         }
@@ -69,10 +77,11 @@ public class Shooting : MonoBehaviour
     public bool rapidFire = false;
     IEnumerator PowerupCountdownRoutine()
     {
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(powerupTime);
         piercing = false;
         rapidFire = false;
         gameManager.UpdatePowerup("None");
+        GetComponent<Renderer>().material = Gun;
 
     }
 }

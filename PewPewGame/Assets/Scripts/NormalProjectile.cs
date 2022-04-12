@@ -9,7 +9,6 @@ public class NormalProjectile : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
-    public ParticleSystem explosionParticle;
     public int pointValue = 50;
     private GameManager gameManager;
     // Update is called once per frame
@@ -20,14 +19,8 @@ public class NormalProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            explosionParticle.Play();
-            Destroy(gameObject);
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            explosionParticle.Play();
             Destroy(gameObject);
             Destroy(other.gameObject);
             gameManager.UpdateScore(pointValue);

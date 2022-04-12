@@ -9,7 +9,6 @@ public class PiercingProjectile : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
-    public ParticleSystem explosionParticle;
     public int pointValue = 50;
     private GameManager gameManager;
     // Update is called once per frame
@@ -20,13 +19,8 @@ public class PiercingProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Obstacle"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            explosionParticle.Play();
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            explosionParticle.Play();
             Destroy(other.gameObject);
             gameManager.UpdateScore(pointValue);
         }
