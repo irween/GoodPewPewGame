@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float speed = 10f;
+    public float xRange = 30;
+    public float dodgeTimeout;
+    public float dodgeCooldown;
+    public float dodgeSpeed = 30f;
+
+    private float horizontalInput;
+    private float verticalInput;
+    private GameManager gameManager;
+    private bool canDodge = true;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        canDodge = true;
     }
-    public float speed = 10f;
-    public float xRange = 30;
-    public float rollTime = 0.002f;
-    public float rollSpeed = 30f;
-
-    private bool invincibilityTime = false;
-    private float horizontalInput;
-    private float verticalInput;
-    private GameManager gameManager;
-
+ 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
-            speed += rollSpeed;
-            invincibilityTime = true;
-            StartCoroutine(RollCountdownRoutine(rollTime));
+            speed += dodgeSpeed;
+            canDodge = false;
+            StartCoroutine(RollTimeOut(dodgeCooldown));
+            StartCoroutine(RollCountdownRoutine(dodgeTimeout));
         }
 
         horizontalInput = Input.GetAxis("Horizontal");
@@ -57,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy") && invincibilityTime == false)
+        if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
             gameManager.UpdateGameOver(true);
@@ -68,8 +71,13 @@ public class PlayerController : MonoBehaviour
     IEnumerator RollCountdownRoutine(float timeOut)
     {
         yield return new WaitForSeconds(timeOut);
-        invincibilityTime = false;
         speed = 10f;
 
+    }
+
+    IEnumerator RollTimeOut(float timeOut)
+    {
+        yield return new WaitForSeconds(timeOut);
+        canDodge = true;
     }
 }

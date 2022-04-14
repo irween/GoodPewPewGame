@@ -786,8 +786,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   xRange: 32
-  rollTime: 0.2
-  rollSpeed: 40
+  dodgeTimeout: 0.1
+  dodgeCooldown: 1
+  dodgeSpeed: 40
 --- !u!65 &918620392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1734,7 +1735,7 @@ Camera:
   far clip plane: 1000
   field of view: 76
   orthographic: 1
-  orthographic size: 13
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
