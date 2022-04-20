@@ -33,7 +33,18 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(RollCountdownRoutine(dodgeTimeout));
         }
 
-        horizontalInput = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 20f; 
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = 10f;
+        }
+
+
+            horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
