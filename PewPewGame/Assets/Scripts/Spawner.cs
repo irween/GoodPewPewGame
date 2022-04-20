@@ -11,12 +11,14 @@ public class Spawner : MonoBehaviour
     public float spawnRangeZ = 30;
     public float startDelay = 2;
     public float spawnInterval = 5f;
-    public int waveNumber = 1;
 
-    public int enemyIndex;
-    public int powerupIndex;
-    public int enemyCount;
-    public int powerupCount;
+    public bool spawning = true;
+
+    private int waveNumber = 1;
+    private int enemyIndex;
+    private int powerupIndex;
+    private int enemyCount;
+    private int powerupCount;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +32,7 @@ public class Spawner : MonoBehaviour
         enemyCount = FindObjectsOfType<Enemy>().Length;
         powerupCount = FindObjectsOfType<Powerups>().Length;
 
-        if (enemyCount == 0)
+        if (enemyCount == 0 && spawning)
         {
             waveNumber++;
             SpawnRandomEnemyWave(waveNumber);

@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Spawner
+  - Projectile
+  - PiercingProjectile
+  - Enemy
+  - Piercing
+  - RapidFire
+  - Shotgun
   layers:
   - Default
   - TransparentFX
