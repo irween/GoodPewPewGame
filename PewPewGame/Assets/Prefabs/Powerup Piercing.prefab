@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1774793925290620397}
   - component: {fileID: 1774793925290620396}
   - component: {fileID: 1774793925290620399}
-  - component: {fileID: -8585698764022429994}
   m_Layer: 0
   m_Name: Powerup Piercing
   m_TagString: Piercing
@@ -98,15 +97,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8585698764022429994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774793925290620398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cef981d998bd47f408854c2238487926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

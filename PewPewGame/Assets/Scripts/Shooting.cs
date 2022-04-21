@@ -15,19 +15,31 @@ public class Shooting : MonoBehaviour
         impulse = transform.GetComponent<CinemachineImpulseSource>();
     }
 
+    // creating variables
     private float timeToFire;
     private GameManager gameManager;
+    
+    // creating GameObject variables
+    public GameObject Player;
 
+    // creating public variables
     public float timeToFireInterval = 0.5f;
     public GameObject[] projectilePrefab;
     public Material[] powerupMaterial;
     public int projectileIndex;
     public Vector3 offset = new Vector3(0, 0, 0);
 
+    // creating shotgun variables (controls the spread of the shotgun shot)
     public Quaternion shotgunAngle;
     public float angle;
     public float angleModifier;
     public int shotgunAmount;
+
+    // creating the powerup booleans (controls if the powerup is active or not)
+    public bool piercing = false;
+    public bool rapidFire = false;
+    public bool shotgun = false;
+    public bool notInvincibility = false;
 
     // Update is called once per frame
     void Update()
@@ -39,7 +51,7 @@ public class Shooting : MonoBehaviour
             if (piercing)
             {
                 Instantiate(projectilePrefab[1], transform.position + offset, transform.rotation);
-                impulse.GenerateImpulse(0.5f);
+                impulse.GenerateImpulse(0.3f);
                 timeToFireInterval = 0.5f;
                 timeToFire = timeToFireInterval;
             }
@@ -51,7 +63,7 @@ public class Shooting : MonoBehaviour
             }
             else if (shotgun)
             {
-                impulse.GenerateImpulse(0.8f);
+                impulse.GenerateImpulse(2f);
                 angle = -60;
                 for (int i = 0; i < shotgunAmount; i++)
                 {
@@ -64,16 +76,13 @@ public class Shooting : MonoBehaviour
             }
             else
             {
-                impulse.GenerateImpulse(0.3f);
+                impulse.GenerateImpulse(0.1f);
                 Instantiate(projectilePrefab[0], transform.position + offset, transform.rotation);
                 timeToFireInterval = 0.5f;
                 timeToFire = timeToFireInterval;
             }
         }
     }
-    public bool piercing = false;
-    public bool rapidFire = false;
-    public bool shotgun = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -82,6 +91,7 @@ public class Shooting : MonoBehaviour
             piercing = true;
             rapidFire = false;
             shotgun = false;
+            notInvincibility = true;
 
             Destroy(other.gameObject);
 
@@ -95,6 +105,7 @@ public class Shooting : MonoBehaviour
             rapidFire = true;
             piercing = false;
             shotgun = false;
+            notInvincibility = true;
 
             Destroy(other.gameObject);
 
@@ -110,6 +121,7 @@ public class Shooting : MonoBehaviour
             shotgun = true;
             rapidFire = false;
             piercing = false;
+            notInvincibility = true;
 
             Destroy(other.gameObject);
 
@@ -117,7 +129,33 @@ public class Shooting : MonoBehaviour
 
             GetComponent<Renderer>().material = powerupMaterial[3];
             gameManager.UpdatePowerup("Shotgun");
+        }
 
+        else if (other.gameObject.CompareTag("Invincibility"))
+        {
+            notInvincibility = false;
+            shotgun = false;
+            rapidFire = false;
+            piercing = false;
+
+            Destroy(other.gameObject);
+
+            StartCoroutine(PowerupCountdownRoutine(4));
+
+            GetComponent<Renderer>().material = powerupMaterial[4];
+            gameManager.UpdatePowerup("Invincibility");
+        }
+
+        else if (other.gameObject.CompareTag("Enemy") && notInvincibility)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                GameObject.Destroy(enemy);
+            }
+                
+            Debug.Log("HIT");
+            StartCoroutine(Player.GetComponent<PlayerController>().DestroyPlayer(true));
         }
     }
     IEnumerator PowerupCountdownRoutine(int powerupTime)
@@ -126,8 +164,8 @@ public class Shooting : MonoBehaviour
         piercing = false;
         rapidFire = false;
         shotgun = false;
+        notInvincibility = true;
         GetComponent<Renderer>().material = powerupMaterial[0];
         gameManager.UpdatePowerup("None");
-
     }
 }

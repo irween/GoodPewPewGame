@@ -69,16 +69,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject);
-            gameManager.UpdateGameOver(true);
-            Destroy(other.gameObject);
-        }
-    }
-
     IEnumerator RollCountdownRoutine(float timeOut)
     {
         yield return new WaitForSeconds(timeOut);
@@ -90,5 +80,13 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(timeOut);
         canDodge = true;
+    }
+
+    public IEnumerator DestroyPlayer(bool gameOver)
+    {
+        gameManager.UpdateGameOver(gameOver);
+        Destroy(gameObject);
+
+        yield return null;
     }
 }

@@ -44,7 +44,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < waves; i++)
         {
             SpawnRandomEnemy();
-            if (powerupCount == 0)
+            if (powerupCount <= 3)
             {
                 SpawnRandomPowerup();
             }
