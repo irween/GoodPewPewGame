@@ -43,34 +43,58 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < waves; i++)
         {
-            SpawnRandomEnemy();
+            SpawnRandomEnemy(spawning);
             if (powerupCount <= 3)
             {
-                SpawnRandomPowerup();
+                SpawnRandomPowerup(spawning);
             }
         }
     }
 
-    void SpawnRandomEnemy()
+    public void SpawnRandomEnemy(bool spawningEnemies)
     {
-        int enemyIndex = Random.Range(0, Enemies.Length);
+        if (spawningEnemies)
+        {
+            int enemyIndex = Random.Range(0, Enemies.Length);
 
-        
 
-        Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
-            1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-        Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
+            Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+                1, Random.Range(-spawnRangeZ, spawnRangeZ));
+
+            Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
+        }
+
+        else
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                GameObject.Destroy(enemy);
+            }
+            Debug.Log("FALSE");
+        }
     }
-    void SpawnRandomPowerup()
+    public void SpawnRandomPowerup(bool spawningPowerups)
     {
-        int powerupIndex = Random.Range(0, Powerups.Length);
+        if (spawningPowerups)
+        {
+            int powerupIndex = Random.Range(0, Powerups.Length);
 
-        Vector3 spawnposPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
-            1, Random.Range(-spawnRangeZ, spawnRangeZ));
+            Vector3 spawnposPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+                1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-        Instantiate(Powerups[powerupIndex], spawnposPowerup, Powerups[powerupIndex].transform.rotation);
+            Instantiate(Powerups[powerupIndex], spawnposPowerup, Powerups[powerupIndex].transform.rotation);
+        }
 
-        
+        else
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                GameObject.Destroy(enemy);
+            }
+            Debug.Log("FALSE");
+        }
     }
 }

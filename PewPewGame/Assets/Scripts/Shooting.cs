@@ -21,6 +21,7 @@ public class Shooting : MonoBehaviour
     
     // creating GameObject variables
     public GameObject Player;
+    public GameObject Spawner;
 
     // creating public variables
     public float timeToFireInterval = 0.5f;
@@ -39,7 +40,7 @@ public class Shooting : MonoBehaviour
     public bool piercing = false;
     public bool rapidFire = false;
     public bool shotgun = false;
-    public bool notInvincibility = false;
+    public bool invincibility = false;
 
     // Update is called once per frame
     void Update()
@@ -91,7 +92,7 @@ public class Shooting : MonoBehaviour
             piercing = true;
             rapidFire = false;
             shotgun = false;
-            notInvincibility = true;
+            invincibility = false;
 
             Destroy(other.gameObject);
 
@@ -105,7 +106,7 @@ public class Shooting : MonoBehaviour
             rapidFire = true;
             piercing = false;
             shotgun = false;
-            notInvincibility = true;
+            invincibility = false;
 
             Destroy(other.gameObject);
 
@@ -121,7 +122,7 @@ public class Shooting : MonoBehaviour
             shotgun = true;
             rapidFire = false;
             piercing = false;
-            notInvincibility = true;
+            invincibility = false;
 
             Destroy(other.gameObject);
 
@@ -133,7 +134,7 @@ public class Shooting : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Invincibility"))
         {
-            notInvincibility = false;
+            invincibility = true;
             shotgun = false;
             rapidFire = false;
             piercing = false;
@@ -146,16 +147,19 @@ public class Shooting : MonoBehaviour
             gameManager.UpdatePowerup("Invincibility");
         }
 
-        else if (other.gameObject.CompareTag("Enemy") && notInvincibility)
+        else if (other.gameObject.CompareTag("Enemy") && !invincibility)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in enemies)
             {
                 GameObject.Destroy(enemy);
             }
-                
-            Debug.Log("HIT");
+
+            Spawner.GetComponent<Spawner>().SpawnRandomPowerup(false);
+            Spawner.GetComponent<Spawner>().SpawnRandomEnemy(false);
             StartCoroutine(Player.GetComponent<PlayerController>().DestroyPlayer(true));
+
+            Debug.Log("HIT");
         }
     }
     IEnumerator PowerupCountdownRoutine(int powerupTime)
@@ -164,7 +168,7 @@ public class Shooting : MonoBehaviour
         piercing = false;
         rapidFire = false;
         shotgun = false;
-        notInvincibility = true;
+        invincibility = false;
         GetComponent<Renderer>().material = powerupMaterial[0];
         gameManager.UpdatePowerup("None");
     }

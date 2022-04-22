@@ -835,7 +835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72e5a7e43c5ff8b439beb94b5eb40660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 961437479}
+  Player: {fileID: 918620388}
+  Spawner: {fileID: 1975914159}
   timeToFireInterval: 0.5
   projectilePrefab:
   - {fileID: 9190605283574875382, guid: be97904039d53144f8f8024517b51512, type: 3}
@@ -857,7 +858,7 @@ MonoBehaviour:
   piercing: 0
   rapidFire: 0
   shotgun: 0
-  notInvincibility: 0
+  invincibility: 0
 --- !u!114 &887406318
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,9 +83,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public IEnumerator DestroyPlayer(bool gameOver)
-    {
+    { 
         gameManager.UpdateGameOver(gameOver);
         Destroy(gameObject);
+        Debug.Log("HIT");
 
         yield return null;
     }
