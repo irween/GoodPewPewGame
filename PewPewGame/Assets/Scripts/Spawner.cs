@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    // setting the GameObject variables as a list, 
     public GameObject[] Enemies;
     public GameObject[] Powerups;
 
@@ -23,78 +24,68 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnRandomEnemyWave(1);
+        // the game starts by spawning an enemy and a powerup
+        SpawnRandomEnemy(spawning);
+        SpawnRandomPowerup(spawning);
     }
     
     // Update is called once per frame
     void Update()
     {
+        // finding each enemy and projectile object with the corresponding script then finding the length of the list
         enemyCount = FindObjectsOfType<Enemy>().Length;
         powerupCount = FindObjectsOfType<Powerups>().Length;
 
+        // when there are no enemies, the next wave starts. waveNumber controls the amount of enemies spawned at a time
         if (enemyCount == 0 && spawning)
         {
             waveNumber++;
-            SpawnRandomEnemyWave(waveNumber);
-        }
-    }
-
-    void SpawnRandomEnemyWave(int waves)
-    {
-        for (int i = 0; i < waves; i++)
-        {
-            SpawnRandomEnemy(spawning);
-            if (powerupCount <= 3)
+            for (int i = 0; i < waveNumber; i++)
             {
-                SpawnRandomPowerup(spawning);
+                SpawnRandomEnemy(spawning);
+                if (powerupCount <= 3)
+                {
+                    SpawnRandomPowerup(spawning);
+                }
             }
         }
     }
 
+    // this function is called whenever there are no enemies, and at the start of the game
+    // it spawns a random enemy type at a random location.
+    // parameters - a boolean that enables/disables spawning
+    // return value - none
+
     public void SpawnRandomEnemy(bool spawningEnemies)
     {
+        // if spawningEnemies is true then it spawns enemies, but if it is false, it doesn't spawn more enemies
         if (spawningEnemies)
         {
             int enemyIndex = Random.Range(0, Enemies.Length);
 
 
 
-            Vector3 spawnpos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
                 1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-            Instantiate(Enemies[enemyIndex], spawnpos, Enemies[enemyIndex].transform.rotation);
-        }
-
-        else
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                GameObject.Destroy(enemy);
-            }
-            Debug.Log("FALSE");
+            Instantiate(Enemies[enemyIndex], spawnPos, Enemies[enemyIndex].transform.rotation);
         }
     }
+
+    // this function is called whenever the next wave starts (when all enemies on screen are destroyed)
+    // it spawns a random enemy type at a random location.
+    // parameters - a boolean that enables/disables spawning
+    // return value - none
     public void SpawnRandomPowerup(bool spawningPowerups)
     {
         if (spawningPowerups)
         {
             int powerupIndex = Random.Range(0, Powerups.Length);
 
-            Vector3 spawnposPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+            Vector3 spawnPosPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
                 1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-            Instantiate(Powerups[powerupIndex], spawnposPowerup, Powerups[powerupIndex].transform.rotation);
-        }
-
-        else
-        {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                GameObject.Destroy(enemy);
-            }
-            Debug.Log("FALSE");
+            Instantiate(Powerups[powerupIndex], spawnPosPowerup, Powerups[powerupIndex].transform.rotation);
         }
     }
 }
