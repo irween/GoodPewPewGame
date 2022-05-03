@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PiercingProjectile : MonoBehaviour
 {
+    public int pointValue = 50;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
-    public int pointValue = 50;
-    private GameManager gameManager;
+    
     // Update is called once per frame
     void Update()
     {

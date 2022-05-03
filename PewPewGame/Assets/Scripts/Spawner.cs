@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // setting the GameObject variables as a list, 
+    // setting the GameObject variables as a list
     public GameObject[] Enemies;
     public GameObject[] Powerups;
 
+    // setting the spawning variables
     public float spawnRangeX = 30;
     public float spawnRangeZ = 30;
     public float startDelay = 2;
     public float spawnInterval = 5f;
 
+    // making a public variable that can be "turned on" or "off" (making it true or false) to stop and start the spawning.
+    // this helps me troubleshoot the game
     public bool spawning = true;
 
+    // setting private variables
     private int waveNumber = 1;
     private int enemyIndex;
     private int powerupIndex;
@@ -61,13 +65,14 @@ public class Spawner : MonoBehaviour
         // if spawningEnemies is true then it spawns enemies, but if it is false, it doesn't spawn more enemies
         if (spawningEnemies)
         {
+            // getting a random index of the powerup list
             int enemyIndex = Random.Range(0, Enemies.Length);
 
-
-
+            // getting a random spawn location in the specefied range
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
                 1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
+            // spawning the enemy
             Instantiate(Enemies[enemyIndex], spawnPos, Enemies[enemyIndex].transform.rotation);
         }
     }
@@ -80,11 +85,14 @@ public class Spawner : MonoBehaviour
     {
         if (spawningPowerups)
         {
+            // getting a random index of the powerup list
             int powerupIndex = Random.Range(0, Powerups.Length);
 
+            // getting a random spawn location in the specefied range
             Vector3 spawnPosPowerup = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
                 1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
+            // spawning the powerup
             Instantiate(Powerups[powerupIndex], spawnPosPowerup, Powerups[powerupIndex].transform.rotation);
         }
     }

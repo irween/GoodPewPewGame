@@ -23,10 +23,12 @@ public class Shooting : MonoBehaviour
     public GameObject Player;
     public GameObject Spawner;
 
-    // creating public variables
-    public float timeToFireInterval = 0.5f;
+    // creating GameObject/Material
     public GameObject[] projectilePrefab;
     public Material[] powerupMaterial;
+
+    // creating public variables
+    public float timeToFireInterval = 0.5f;
     public int projectileIndex;
     public Vector3 offset = new Vector3(0, 0, 0);
 
@@ -103,6 +105,8 @@ public class Shooting : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("RapidFire"))
         {
+            gameManager.UpdatePowerup("RapidFire");
+
             rapidFire = true;
             piercing = false;
             shotgun = false;
@@ -113,12 +117,12 @@ public class Shooting : MonoBehaviour
             StartCoroutine(PowerupCountdownRoutine(1));
 
             GetComponent<Renderer>().material = powerupMaterial[2];
-            gameManager.UpdatePowerup("RapidFire");
-
         }
 
         else if (other.gameObject.CompareTag("Shotgun"))
         {
+            gameManager.UpdatePowerup("Shotgun");
+
             shotgun = true;
             rapidFire = false;
             piercing = false;
@@ -129,11 +133,12 @@ public class Shooting : MonoBehaviour
             StartCoroutine(PowerupCountdownRoutine(4));
 
             GetComponent<Renderer>().material = powerupMaterial[3];
-            gameManager.UpdatePowerup("Shotgun");
         }
 
         else if (other.gameObject.CompareTag("Invincibility"))
         {
+            gameManager.UpdatePowerup("Invincibility");
+
             invincibility = true;
             shotgun = false;
             rapidFire = false;
@@ -144,7 +149,6 @@ public class Shooting : MonoBehaviour
             StartCoroutine(PowerupCountdownRoutine(4));
 
             GetComponent<Renderer>().material = powerupMaterial[4];
-            gameManager.UpdatePowerup("Invincibility");
         }
 
         else if (other.gameObject.CompareTag("Enemy") && !invincibility)

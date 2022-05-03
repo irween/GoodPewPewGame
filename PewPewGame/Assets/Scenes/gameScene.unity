@@ -171,7 +171,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.045738, y: 1}
+    m_SensorSize: {x: 3.0206184, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -837,7 +837,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 918620388}
   Spawner: {fileID: 1975914159}
-  timeToFireInterval: 0.5
   projectilePrefab:
   - {fileID: 9190605283574875382, guid: be97904039d53144f8f8024517b51512, type: 3}
   - {fileID: 9190605283574875382, guid: 17146cf0baf41da4da7ad5773199c160, type: 3}
@@ -849,6 +848,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a9a62cb10af1e854a92f97640257a670, type: 2}
   - {fileID: 2100000, guid: efaab610cbbe08e4a9c2f2b97f37c85a, type: 2}
   - {fileID: 2100000, guid: c32051cfacd647f4cbc024190dbfc37c, type: 2}
+  timeToFireInterval: 0.5
   projectileIndex: 0
   offset: {x: 0, y: 0, z: 0}
   shotgunAngle: {x: 30, y: 0, z: 0, w: 0}
