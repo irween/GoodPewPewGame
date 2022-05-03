@@ -53,7 +53,7 @@ public class Spawner : MonoBehaviour
                 }
             }
         }
-    }
+    }   
 
     // this function is called whenever there are no enemies, and at the start of the game
     // it spawns a random enemy type at a random location.

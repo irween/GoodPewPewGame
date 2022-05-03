@@ -153,12 +153,6 @@ public class Shooting : MonoBehaviour
 
         else if (other.gameObject.CompareTag("Enemy") && !invincibility)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                GameObject.Destroy(enemy);
-            }
-
             Spawner.GetComponent<Spawner>().SpawnRandomPowerup(false);
             Spawner.GetComponent<Spawner>().SpawnRandomEnemy(false);
             StartCoroutine(Player.GetComponent<PlayerController>().DestroyPlayer(true));
