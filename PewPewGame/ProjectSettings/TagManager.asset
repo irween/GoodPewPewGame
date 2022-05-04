@@ -12,6 +12,7 @@ TagManager:
   - RapidFire
   - Shotgun
   - Invincibility
+  - Boss
   layers:
   - Default
   - TransparentFX

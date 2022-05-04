@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour
     // setting the GameObject variables as a list
     public GameObject[] Enemies;
     public GameObject[] Powerups;
+    public GameObject[] Bosses;
 
     // setting the spawning variables
     public float spawnRangeX = 30;
@@ -17,6 +18,8 @@ public class Spawner : MonoBehaviour
     // making a public variable that can be "turned on" or "off" (making it true or false) to stop and start the spawning.
     // this helps me troubleshoot the game
     public bool spawning = true;
+
+    public int bossWave;
 
     // setting private variables
     private int waveNumber = 1;
@@ -50,6 +53,11 @@ public class Spawner : MonoBehaviour
                 if (powerupCount <= 3)
                 {
                     SpawnRandomPowerup(spawning);
+                }
+
+                if (waveNumber % bossWave == 0)
+                {
+                    SpawneRandomBoss(spawning);
                 }
             }
         }
@@ -94,6 +102,23 @@ public class Spawner : MonoBehaviour
 
             // spawning the powerup
             Instantiate(Powerups[powerupIndex], spawnPosPowerup, Powerups[powerupIndex].transform.rotation);
+        }
+    }
+
+    public void SpawnRandomBoss(bool spawningEnemies)
+    {
+        // if spawningEnemies is true then it spawns enemies, but if it is false, it doesn't spawn more enemies
+        if (spawningEnemies)
+        {
+            // getting a random index of the powerup list
+            int bossIndex = Random.Range(0, Bosses.Length);
+
+            // getting a random spawn location in the specefied range
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+                1, Random.Range(-spawnRangeZ, spawnRangeZ));
+
+            // spawning the enemy
+            Instantiate(Bosses[bossIndex], spawnPos, Bosses[bossIndex].transform.rotation);
         }
     }
 }

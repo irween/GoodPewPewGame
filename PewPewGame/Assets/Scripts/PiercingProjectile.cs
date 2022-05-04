@@ -25,5 +25,10 @@ public class PiercingProjectile : MonoBehaviour
             Destroy(other.gameObject);
             gameManager.UpdateScore(pointValue);
         }
+
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            gameManager.UpdateScore(pointValue);
+        }
     }
 }

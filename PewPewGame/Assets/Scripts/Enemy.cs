@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 
     // creating GameObject
     public GameObject player;
-    public Transform other;
+    public Transform playerTransform;
 
     // getting the GameObject's rigidbody component
     private Rigidbody enemyRb;
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
     // this function detects when the GameObjects collider is triggered by another GameObject
     // 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Projectile"))
         {
