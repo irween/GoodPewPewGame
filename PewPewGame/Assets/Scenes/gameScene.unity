@@ -171,7 +171,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 3.045738, y: 1}
+    m_SensorSize: {x: 3.0206184, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2128,16 +2128,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies:
-  - {fileID: 5559111641968498926, guid: 2fc042bed689608449398a8c274ccbb2, type: 3}
-  - {fileID: 5785168438462333025, guid: 09c8a006b5b5d834682b4a4da63d9e29, type: 3}
   - {fileID: 8732908164055614085, guid: 103c4aa07563fc144947215aacf63e32, type: 3}
-  Powerups:
+  PowerupObjects:
+  - {fileID: 1789128570431520271, guid: a5c4092b5168fdc41b34200746513979, type: 3}
   - {fileID: 1774793925290620398, guid: 3fe230b80fe80c446b434b742bd8d492, type: 3}
   - {fileID: 1789128570431520271, guid: e2ba7ae91e0b4ae48beddffcd5275e52, type: 3}
   - {fileID: 1789128570431520271, guid: 8b2c7d44677beea49894eb7c55f03160, type: 3}
-  - {fileID: 1789128570431520271, guid: a5c4092b5168fdc41b34200746513979, type: 3}
+  Bosses:
+  - {fileID: 8732908164055614085, guid: 103c4aa07563fc144947215aacf63e32, type: 3}
   spawnRangeX: 30
   spawnRangeZ: 30
   startDelay: 2
   spawnInterval: 5
   spawning: 1
+  bossWave: 10

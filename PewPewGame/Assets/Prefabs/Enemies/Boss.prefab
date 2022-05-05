@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d474243f19272a148836e50d5e0b2ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 5
   distance: 0
   health: 10
   player: {fileID: 0}
-  other: {fileID: 0}
+  playerTransform: {fileID: 0}

@@ -103,7 +103,7 @@ public class Shooting : MonoBehaviour
             GetComponent<Renderer>().material = powerupMaterial[1];
             gameManager.UpdatePowerup("Piercing");
         }
-        else if (other.gameObject.CompareTag("RapidFire"))
+        if (other.gameObject.CompareTag("RapidFire"))
         {
             gameManager.UpdatePowerup("RapidFire");
 
@@ -119,7 +119,7 @@ public class Shooting : MonoBehaviour
             GetComponent<Renderer>().material = powerupMaterial[2];
         }
 
-        else if (other.gameObject.CompareTag("Shotgun"))
+        if (other.gameObject.CompareTag("Shotgun"))
         {
             gameManager.UpdatePowerup("Shotgun");
 
@@ -135,7 +135,7 @@ public class Shooting : MonoBehaviour
             GetComponent<Renderer>().material = powerupMaterial[3];
         }
 
-        else if (other.gameObject.CompareTag("Invincibility"))
+        if (other.gameObject.CompareTag("Invincibility"))
         {
             gameManager.UpdatePowerup("Invincibility");
 
@@ -151,10 +151,15 @@ public class Shooting : MonoBehaviour
             GetComponent<Renderer>().material = powerupMaterial[4];
         }
 
-        else if (other.gameObject.CompareTag("Enemy") && !invincibility)
+        if (other.gameObject.CompareTag("Enemy") && !invincibility)
         {
-            Spawner.GetComponent<Spawner>().SpawnRandomPowerup(false);
-            Spawner.GetComponent<Spawner>().SpawnRandomEnemy(false);
+            StartCoroutine(Player.GetComponent<PlayerController>().DestroyPlayer(true));
+
+            Debug.Log("HIT");
+        }
+
+        if (other.gameObject.CompareTag("Boss") && !invincibility)
+        {
             StartCoroutine(Player.GetComponent<PlayerController>().DestroyPlayer(true));
 
             Debug.Log("HIT");
