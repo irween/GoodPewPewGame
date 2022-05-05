@@ -19,8 +19,7 @@ public class Spawner : MonoBehaviour
     // this helps me troubleshoot the game
     public bool spawning = true;
 
-    public float bossWave = 10;
-    private float bossWaveNumber;
+    public float bossWave;
 
     // setting private variables
     private int waveNumber = 1;
@@ -28,7 +27,7 @@ public class Spawner : MonoBehaviour
     private int powerupIndex;
     private int enemyCount;
     private int bossCount;
-    private int bossSpawnCount;
+    private int bossSpawnCount = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -46,25 +45,24 @@ public class Spawner : MonoBehaviour
         bossCount = FindObjectsOfType<EnemyBoss>().Length;
 
         // when there are no enemies, the next wave starts. waveNumber controls the amount of enemies spawned at a time
-        if (enemyCount == 0 && spawning && bossCount == 0)
+        if (enemyCount == 0 && spawning)
         {
             DeletePowerups();
             waveNumber++;
-            bossWaveNumber++;
             for (int i = 0; i < waveNumber; i++)
             {
                 SpawnRandomEnemy();
-
                 SpawnRandomPowerup();
-
-                if (bossWaveNumber == bossWave)
-                {
-                    bossWaveNumber = 0;
-                    bossSpawnCount++;
-                    SpawnRandomBoss();
-                }
-                
             }
+
+            if (waveNumber == bossWave && bossCount == 0)
+            {
+                SpawnRandomBoss(bossSpawnCount);
+                bossWave++;
+                bossSpawnCount++;
+                waveNumber = 0;
+            }
+
         }
     }   
 
@@ -110,18 +108,21 @@ public class Spawner : MonoBehaviour
     // parameters - none
     // return value - none
 
-    public void SpawnRandomBoss()
+    public void SpawnRandomBoss(int spawnCount)
     {
+        for (int i = 0; i < spawnCount; i++)
+        {
+            // getting a random index of the powerup list
+            int bossIndex = Random.Range(0, Bosses.Length);
 
-        // getting a random index of the powerup list
-        int bossIndex = Random.Range(0, Bosses.Length);
+            // getting a random spawn location in the specefied range
+            Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
+                1, Random.Range(-spawnRangeZ, spawnRangeZ));
 
-        // getting a random spawn location in the specefied range
-        Vector3 spawnPos = new Vector3(Random.Range(-spawnRangeX, spawnRangeX),
-            1, Random.Range(-spawnRangeZ, spawnRangeZ));
-
-        // spawning the enemy
-        Instantiate(Bosses[bossIndex], spawnPos, Bosses[bossIndex].transform.rotation);
+            // spawning the enemy
+            Instantiate(Bosses[bossIndex], spawnPos, Bosses[bossIndex].transform.rotation);
+        }
+        
     }
 
     // this function is called whenever the next wave starts
