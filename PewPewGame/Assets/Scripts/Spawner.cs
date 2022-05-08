@@ -131,11 +131,13 @@ public class Spawner : MonoBehaviour
     // return value - none
     private void DeletePowerups()
     {
+        // finding each powerup to be destroyed
         GameObject[] rapidFire = GameObject.FindGameObjectsWithTag("RapidFire");
         GameObject[] piercing = GameObject.FindGameObjectsWithTag("Piercing");
         GameObject[] invincibility = GameObject.FindGameObjectsWithTag("Invincibility");
         GameObject[] shotgun = GameObject.FindGameObjectsWithTag("Shotgun");
 
+        // destroying each powerupp //
         foreach (var rapidFireObject in rapidFire)
         {
             Destroy(rapidFireObject);

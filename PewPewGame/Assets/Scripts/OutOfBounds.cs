@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class OutOfBounds : MonoBehaviour
 {
+    // public variable
+    public float bounds = 35;
+
     // Start is called before the first frame update
     void Start()
     {
         
     }
-    public float bounds = 35;
-
 
     // Update is called once per frame
     void Update()
     {
+        // object bounds //
+
+        // these are the object bounds that destroys the gameobject whenever it reaches the coordinates
         if (transform.position.z > bounds)
         {
             Destroy(gameObject);

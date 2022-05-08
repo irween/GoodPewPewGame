@@ -39,9 +39,12 @@ public class EnemyBoss : MonoBehaviour
     }
 
     // this function detects when the GameObjects collider is triggered by another GameObject
-    // 
+    // parameters - Collider : this is the game object, other : this is the game object that collides with this object
+    // return value - none
     private void OnTriggerEnter(Collider other)
     {
+        // when the object collides with a projectile, the boss loses one "health",
+        // when the boss loses all the health, it gets destroyed
         if (other.gameObject.CompareTag("Projectile"))
         {
             Destroy(other.gameObject);

@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class NormalProjectile : MonoBehaviour
 {
+    // public variables
+    public int pointValue = 50;
+
+    // private variables
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
-    public int pointValue = 50;
-    private GameManager gameManager;
+    
     // Update is called once per frame
     void Update()
     {
@@ -19,10 +24,23 @@ public class NormalProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // detects if the projectile has collided with the enemy
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+
+            // updates the score
+            gameManager.UpdateScore(pointValue);
+        }
+
+        // detects if the projectile has collided with the boss
+        if (other.gameObject.CompareTag("Boss"))
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+
+            // updates the score
             gameManager.UpdateScore(pointValue);
         }
     }
