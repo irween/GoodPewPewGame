@@ -7,9 +7,11 @@ public class GameManager : MonoBehaviour
 {
     // public variables
     public int score;
+    public int currentWave;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI powerupIndicator;
     public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI waveText;
     public string powerup;
 
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         UpdateGameOver(false);
         UpdateScore(0);
+        UpdateWave(1);
     }
 
     // Update is called once per frame
@@ -34,6 +37,13 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score : " + score;
+    }
+
+    // this function increases the wave when another script calls the function with a provided integer
+    public void UpdateWave(int wave)
+    {
+        currentWave += wave;
+        waveText.text = "Wave : " + currentWave;
     }
 
     // this function updates the powerup when called from another script with a string

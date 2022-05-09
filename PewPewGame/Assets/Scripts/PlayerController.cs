@@ -89,6 +89,33 @@ public class PlayerController : MonoBehaviour
     // return value - none
     public void DestroyPlayer(bool gameOver)
     {
+        // finding each powerup to be destroyed
+        GameObject[] rapidFire = GameObject.FindGameObjectsWithTag("RapidFire");
+        GameObject[] piercing = GameObject.FindGameObjectsWithTag("Piercing");
+        GameObject[] invincibility = GameObject.FindGameObjectsWithTag("Invincibility");
+        GameObject[] shotgun = GameObject.FindGameObjectsWithTag("Shotgun");
+
+        // destroying each powerupp //
+        foreach (var rapidFireObject in rapidFire)
+        {
+            Destroy(rapidFireObject);
+        }
+
+        foreach (var piercingObject in piercing)
+        {
+            Destroy(piercingObject);
+        }
+
+        foreach (var invincibilityObject in invincibility)
+        {
+            Destroy(invincibilityObject);
+        }
+
+        foreach (var shotgunObject in shotgun)
+        {
+            Destroy(shotgunObject);
+        }
+
         gameManager.UpdateGameOver(gameOver);
         Destroy(gameObject);
         Debug.Log("HIT");

@@ -7,14 +7,6 @@ public class Shooting : MonoBehaviour
 {
     CinemachineImpulseSource impulse;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
-        impulse = transform.GetComponent<CinemachineImpulseSource>();
-    }
-
     // creating variables
     private float timeToFire;
     private GameManager gameManager;
@@ -44,6 +36,14 @@ public class Shooting : MonoBehaviour
     public bool shotgun = false;
     public bool invincibility = false;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        impulse = transform.GetComponent<CinemachineImpulseSource>();
+    }
+    
     // Update is called once per frame
     void Update()
     {

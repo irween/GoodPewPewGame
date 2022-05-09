@@ -23,15 +23,20 @@ public class Spawner : MonoBehaviour
 
     // setting private variables
     private int waveNumber = 1;
+    private int spawningNumber = 1;
     private int enemyIndex;
     private int powerupIndex;
     private int enemyCount;
     private int bossCount;
     private int bossSpawnCount = 1;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        // finds the gamemanager script in the game manager object
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         // the game starts by spawning an enemy and a powerup
         SpawnRandomEnemy();
         SpawnRandomPowerup();
@@ -40,7 +45,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // finding each enemy and projectile object with the corresponding script then finding the length of the list
+        // finding each enemy and boss object with the corresponding script then finding the length of the list
         enemyCount = FindObjectsOfType<Enemy>().Length;
         bossCount = FindObjectsOfType<EnemyBoss>().Length;
 
@@ -48,19 +53,21 @@ public class Spawner : MonoBehaviour
         if (enemyCount == 0 && spawning)
         {
             DeletePowerups();
-            waveNumber++;
-            for (int i = 0; i < waveNumber; i++)
+            spawningNumber++;
+            gameManager.UpdateWave(1);
+
+            for (int i = 0; i < spawningNumber; i++)
             {
                 SpawnRandomEnemy();
                 SpawnRandomPowerup();
             }
 
-            if (waveNumber == bossWave && bossCount == 0)
+            if (spawningNumber == bossWave && bossCount == 0)
             {
                 SpawnRandomBoss(bossSpawnCount);
                 bossWave++;
                 bossSpawnCount++;
-                waveNumber = 0;
+                spawningNumber = 0;
             }
 
         }
@@ -137,7 +144,7 @@ public class Spawner : MonoBehaviour
         GameObject[] invincibility = GameObject.FindGameObjectsWithTag("Invincibility");
         GameObject[] shotgun = GameObject.FindGameObjectsWithTag("Shotgun");
 
-        // destroying each powerupp //
+        // destroying each powerup //
         foreach (var rapidFireObject in rapidFire)
         {
             Destroy(rapidFireObject);
