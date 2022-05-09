@@ -14,12 +14,12 @@ public class Spawner : MonoBehaviour
     public float spawnRangeZ = 30;
     public float startDelay = 2;
     public float spawnInterval = 5f;
+    public float bossWave;
+
 
     // making a public variable that can be "turned on" or "off" (making it true or false) to stop and start the spawning.
     // this helps me troubleshoot the game
     public bool spawning = true;
-
-    public float bossWave;
 
     // setting private variables
     private int waveNumber = 1;
@@ -64,8 +64,8 @@ public class Spawner : MonoBehaviour
 
             if (spawningNumber == bossWave && bossCount == 0)
             {
-                SpawnRandomBoss(bossSpawnCount);
                 bossWave++;
+                SpawnRandomBoss(bossSpawnCount);
                 bossSpawnCount++;
                 spawningNumber = 0;
             }

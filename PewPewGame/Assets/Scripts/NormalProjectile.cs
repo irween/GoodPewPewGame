@@ -38,7 +38,6 @@ public class NormalProjectile : MonoBehaviour
         if (other.gameObject.CompareTag("Boss"))
         {
             Destroy(gameObject);
-            Destroy(other.gameObject);
 
             // updates the score
             gameManager.UpdateScore(pointValue);
